@@ -40,7 +40,7 @@ class PortfolioController extends Controller
       // dd($request);
         //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:portfolio,name',
+            'name'=>'required|string|max:255|min:3|unique:portfolios,name',
              'description'=> 'required|string|max:255|min:5',
              'status'=> 'required|in:on,off'
 
