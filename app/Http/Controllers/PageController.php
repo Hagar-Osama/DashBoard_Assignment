@@ -15,7 +15,7 @@ class PageController extends Controller
     public function index()
     {
         $data = Page::select('id', 'name', 'link')->orderBy('order')->get();
-        return view('pages.index',['pages'=> $data]);
+        return view('pages.index', ['pages' => $data]);
     }
 
     /**
@@ -38,10 +38,10 @@ class PageController extends Controller
     {
         //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:pages,name',
-            'link'=>'required|string|max:255|min:3|url',
-             'order'=> 'required|numeric|integer',
-             'status'=> 'required|in:on,off'
+            'name' => 'required|string|max:255|min:3|unique:pages,name',
+            'link' => 'required|string|max:255|min:3|url',
+            'order' => 'required|numeric|integer',
+            'status' => 'required|in:on,off'
 
         ]);
         Page::create($request->except(['_token']));
@@ -58,9 +58,9 @@ class PageController extends Controller
     {
 
         $row = Page::findorfail($id);
-       // dd($id);
-       // return redirect()->route('pages.index');
-       return view('pages.show', ['page' => $row]);
+        // dd($id);
+        // return redirect()->route('pages.index');
+        return view('pages.show', ['page' => $row]);
     }
 
     /**
@@ -72,7 +72,7 @@ class PageController extends Controller
     public function edit($id)
     {
         $row = Page::find($id);
-        return view('Pages.edit', ['Page'=>$row]);
+        return view('Pages.edit', ['Page' => $row]);
     }
 
     /**
@@ -84,17 +84,22 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //validations
-        $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:pages,name',
-            'link'=>'required|string|max:255|min:3|url',
-             'order'=> 'required|integer|numeric',
-             'status'=> 'required|in:on,off'
-
-        ]);
         $row = Page::find($id);
-        $row->update($request->except(['_token','_method']));
-        return redirect()->route('pages.index',['page'=>$row->id])->with('success', 'Page Has Been Updated Successfully');
+        if ($row) {
+            //validations
+            $request->validate([
+                'name' => 'required|string|max:255|min:3|unique:pages,name,'.$id,
+                'link' => 'required|string|max:255|min:3|url',
+                'order' => 'required|integer|numeric',
+                'status' => 'required|in:on,off'
+
+            ]);
+            $row->update($request->except(['_token', '_method']));
+            return redirect()->route('pages.index')->with('success', 'Page Has Been Updated Successfully');
+        }
+
+
+       
     }
 
     /**
@@ -105,7 +110,7 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        if($row = Page::find($id)) {
+        if ($row = Page::find($id)) {
             $row->delete();
             return redirect()->route('pages.index')->with('success', 'Page Has Been Deleted Successfully');
         }

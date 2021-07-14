@@ -1,4 +1,5 @@
-@include('includes/header')
+@include('includes.header')
+@include('includes.navbar')
     <!-- Masthead-->
     <header class="masthead">
         <div class="container">
@@ -15,7 +16,7 @@
 @yield('clients')
 @yield('content')
     <!-- Footer-->
-   @include('includes/footer')
+   @include('includes.footer')
     <!-- Portfolio Modals-->
     <!-- Portfolio item 1 modal popup-->
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
