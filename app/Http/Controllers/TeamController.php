@@ -38,14 +38,20 @@ class TeamController extends Controller
     {
         //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:pages,name',
+            'name'=>'required|string|max:255|min:3|unique:teams,name',
             'link'=>'required|string|max:255|min:3|url',
              'job'=> 'required|string|max:255|min:3',
              'description'=> 'required|string',
              'status'=> 'required|in:on,off'
 
         ]);
-        Team::create($request->except(['_token']));
+        if ($request->hasfile('image')) {
+            $request->validate([
+                'image' =>
+
+            ]);
+        }
+        Team::create($request->except(['_token', 'image']));
         return redirect()->route('teams.index')->with('success', 'team Has Been Created Successfully');
     }
 
@@ -87,7 +93,7 @@ class TeamController extends Controller
     {
         //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:pages,name',
+            'name'=>'required|string|max:255|min:3|unique:teams,name',
             'link'=>'required|string|max:255|min:3|url',
              'job'=> 'required|string|max:255|min:3',
              'description'=> 'required|string',
@@ -112,5 +118,10 @@ class TeamController extends Controller
             return redirect()->route('teams.index')->with('success', 'team Has Been Deleted Successfully');
         }
         return abort('404');
+
+      //  if($row = Team::find($id)) {
+       //     unlink($image->image_name);
+       //     $row->delete();
+       // }
     }
 }

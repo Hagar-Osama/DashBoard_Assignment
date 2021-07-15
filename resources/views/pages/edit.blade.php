@@ -13,7 +13,7 @@ Edit | Pages
             </div>
             <h2>Page Edit</h2>
             <div>
-            <form action = "{{route('pages.update',['page'=>$Page->id])}}" method = "POST">
+            <form action = "{{route('pages.update',['page'=>$Page->id])}}" method = "POST" >
             @csrf
             {{method_field('PUT')}}
   <div class="form-group">

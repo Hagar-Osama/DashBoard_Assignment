@@ -39,7 +39,7 @@ class AboutController extends Controller
     {
         //validations
         $request->validate([
-            'title'=>'required|string|max:255|min:3|unique:pages,name',
+            'title'=>'required|string|max:255|min:3|unique:abouts,name',
             'link'=>'required|string|max:255|min:3|url',
              'description'=> 'required|string',
              'status'=> 'required|in:on,off'
@@ -86,7 +86,7 @@ class AboutController extends Controller
     {
                 //validations
                 $request->validate([
-                    'title'=>'required|string|max:255|min:3|unique:pages,name',
+                    'title'=>'required|string|max:255|min:3|unique:abouts,name',
                     'link'=>'required|string|max:255|min:3|url',
                      'description'=> 'required|string',
                      'status'=> 'required|in:on,off'

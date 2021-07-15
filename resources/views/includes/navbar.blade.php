@@ -16,9 +16,20 @@
                     <li class="nav-item"><a class="nav-link" href="{{route('about')}}">@lang('home.about')</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('team')}}">@lang('home.team')</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('contact')}}">@lang('home.contact')</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('register')}}">@lang('home.register')</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('login')}}">@lang('home.login')</a></li>
+                    @auth
+                    <li class="nav-item">
+                        <form action = "{{url('logout')}}" method = "POST">
+                            @csrf
+                            <input type = "submit" value = "logout" class = "btn btn-primary">
+                        </form>
+                    </li>
+                    <li class="nav-item">welcome, {{Auth::user()->name}}</li>
 
+                   @endauth
+                   @guest
+                   <li class="nav-item"><a class="nav-link" href="{{url('register')}}">@lang('home.register')</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('login')}}">@lang('home.login')</a></li>
+                    @endguest
 
                     @if(app()->getLocale() == 'en')
                     <li class="nav-item"><a class="nav-link" href = "{{route('lang', ['lang' =>'ar'])}}">AR</a></li>

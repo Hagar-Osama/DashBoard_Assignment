@@ -13,7 +13,7 @@ Create | Services
             </div>
             <h2>Team Create</h2>
             <div>
-                <form action="{{route('teams.store')}}" method="POST">
+                <form action="{{route('teams.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Name:</label>
@@ -26,7 +26,7 @@ Create | Services
                     @enderror
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Link:</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="team link" name="link" value="{{old('link')}}">
+                        <input type="url" class="form-control" id="exampleFormControlInput1" placeholder="team link" name="link" value="{{old('link')}}">
                     </div>
                     @error('link')
                     <div class="alert alert-danger">
@@ -63,6 +63,17 @@ Create | Services
                         <span class="alert-danger">{${message}}</span>
                     </div>
                     @enderror
+                    <br>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Image:</label>
+                        <input type="file" name="image">
+                    </div>
+                    @error ('image')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{${message}}</span>
+                    </div>
+                    @enderror
+                    <br>
                     <button type="submit" class="btn btn-primary">Create</button>
 
                 </form>

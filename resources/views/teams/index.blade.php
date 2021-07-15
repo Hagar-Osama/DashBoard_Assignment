@@ -24,6 +24,8 @@ Dashboard | Team
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Job</th>
+                            <th>image</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -38,6 +40,8 @@ Dashboard | Team
                         <tr>
                             <td>{{$team->id}}</td>
                             <td>{{$team->name}}</td>
+                            <td>{{$team->job}}</td>
+                            <td>{{$team->image}}</td>
                             <td><a href="{{route('teams.show',['team'=>$team->id])}}" class="btn btn-warning">Show</a></td>
                             <td><a href="{{route('teams.edit',['team'=>$team->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>

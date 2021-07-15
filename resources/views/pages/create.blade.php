@@ -13,7 +13,7 @@ Create | Services
             </div>
             <h2>Page Create</h2>
             <div>
-                <form action="{{route('pages.store')}}" method="POST">
+                <form action="{{route('pages.store')}}" method="POST" enctype = "multipart/form-data" >
                     @csrf
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Name:</label>

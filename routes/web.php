@@ -58,9 +58,9 @@ Route::resource('pages', PageController::class);
 //Team Routes
 Route::resource('teams',TeamController::class);
 //profile Route
-Route::get('/users/profiles', [UserController::class, 'index']);
+Route::get('/users/profiles', [UserController::class, 'index'])->name('profile');
 //user route
-Route::get('/profiles/{id}', [ProfileController::class, 'index']);
+Route::get('/profiles/{id}', [ProfileController::class, 'index'])->name('users');
 //portfolio Routes
 Route::resource('portfolios',PortfolioController::class);
 //About Routes
