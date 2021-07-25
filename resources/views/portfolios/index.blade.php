@@ -24,20 +24,22 @@ Dashboard | Portfolios
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Image</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @isset($portfolio)
-                        @if($portfoilo->count() > 0)
+                        @isset($portfolios)
+                        @if($portfolios->count() > 0)
                         @endif
                         @endisset
                         @foreach($portfolios as $portfolio)
                         <tr>
                             <td>{{$portfolio->id}}</td>
                             <td>{{$portfolio->name}}</td>
+                            <td>{{$portfolio->image}}</td>
                             <td><a href="{{route('portfolios.show',['portfolio'=>$portfolio->id])}}" class="btn btn-warning">Show</a></td>
                             <td><a href="{{route('portfolios.edit',['portfolio'=>$portfolio->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>

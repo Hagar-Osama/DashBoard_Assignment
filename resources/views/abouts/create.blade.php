@@ -13,13 +13,22 @@ Create | About
             </div>
             <h2>Page Create</h2>
             <div>
-                <form action="{{route('abouts.store')}}" method="POST">
+                <form action="{{route('abouts.store')}}" method="POST" enctype = "multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Title:</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="about title" name="title" value="{{old('title')}}">
                     </div>
                     @error('title')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Year:</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="about year" name="year" value="{{old('year')}}">
+                    </div>
+                    @error('year')
                     <div class="alert alert-danger">
                         <span class="alert-danger">{{$message}}</span>
                     </div>
@@ -54,6 +63,16 @@ Create | About
                         <span class="alert-danger">{${message}}</span>
                     </div>
                     @enderror
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Image:</label>
+                        <input type="file" name="image">
+                    </div>
+                    @error ('image')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{${message}}</span>
+                    </div>
+                    @enderror
+                    <br>
                     <button type="submit" class="btn btn-primary">Create</button>
 
                 </form>

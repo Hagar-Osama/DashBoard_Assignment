@@ -26,13 +26,14 @@ Dashboard | Team
                             <th>Name</th>
                             <th>Job</th>
                             <th>image</th>
+                            <th>Link</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @isset($pages)
+                        @isset($teams)
                         @if($teams->count() > 0)
                         @endif
                         @endisset
@@ -42,13 +43,15 @@ Dashboard | Team
                             <td>{{$team->name}}</td>
                             <td>{{$team->job}}</td>
                             <td>{{$team->image}}</td>
+                            <td>{{$team->link}}</td>
+
                             <td><a href="{{route('teams.show',['team'=>$team->id])}}" class="btn btn-warning">Show</a></td>
                             <td><a href="{{route('teams.edit',['team'=>$team->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>
                                 <form action="{{route('teams.destroy', ['team'=>$team->id])}}" method="POST">
                                     @csrf
-                                    {{{method_field('DELETE')}}}
-                                    <input type="submit" name="delete" value= "Delete" class="btn btn-danger">
+                                    {{method_field('DELETE')}}
+                                    <input type="submit" name="delete" value="Delete" class="btn btn-danger">
 
                                 </form>
                             </td>

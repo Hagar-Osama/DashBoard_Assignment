@@ -38,6 +38,30 @@
                                 About
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('sliders.index')}}">
+                                <span data-feather="file"></span>
+                                Slider
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('clients.index')}}">
+                                <span data-feather="file"></span>
+                                Clients
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('brands.index')}}">
+                                <span data-feather="file"></span>
+                                Brands
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('contacts.index')}}">
+                                <span data-feather="file"></span>
+                                Contact
+                            </a>
+                        </li>
 
                 </div>
             </nav>

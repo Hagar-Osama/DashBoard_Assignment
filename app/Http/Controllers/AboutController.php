@@ -14,8 +14,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $data = About::select('id', 'title', 'link', 'description')->get();
-        return view('abouts.index',['abouts'=> $data]);
+        $data = About::select('id', 'title', 'link', 'description', 'image', 'year')->get();
+        return view('abouts.index', ['abouts' => $data]);
     }
 
     /**
@@ -26,7 +26,6 @@ class AboutController extends Controller
     public function create()
     {
         return view('abouts.create');
-
     }
 
     /**
@@ -39,13 +38,32 @@ class AboutController extends Controller
     {
         //validations
         $request->validate([
-            'title'=>'required|string|max:255|min:3|unique:abouts,name',
-            'link'=>'required|string|max:255|min:3|url',
-             'description'=> 'required|string',
-             'status'=> 'required|in:on,off'
+            'title' => 'required|string|max:255|min:3|unique:abouts,title',
+            'description' => 'required|string',
+            'status' => 'required|in:on,off',
+            'year' => 'required|string',
+           // 'link' => 'required|string|max:255|min:3|url',
+
+
 
         ]);
-        About::create($request->except(['_token']));
+        if ($request->hasfile('image')) {
+            $request->validate([
+                'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
+            ]);
+            $image = $request->file('image');
+            $image_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move('images/about', $image_name);
+           // $data['image'] = $image_name;
+           // $data = $request->except(['_token', 'image']);
+           About::create([
+            "title" => $request->title,
+            "status" => $request->status,
+            "description" =>$request->description,
+            "image" => $image_name
+
+        ]);
+     }
         return redirect()->route('abouts.index')->with('success', 'About Has Been Created Successfully');
     }
 
@@ -58,9 +76,9 @@ class AboutController extends Controller
     public function show($id)
     {
         $row = About::findorfail($id);
-       // dd($about);
-       // return redirect()->route('abouts.index');
-       return view('abouts.show', ['about' => $row]);
+        // dd($about);
+        // return redirect()->route('abouts.index');
+        return view('abouts.show', ['about' => $row]);
     }
 
     /**
@@ -72,7 +90,7 @@ class AboutController extends Controller
     public function edit($id)
     {
         $row = About::find($id);
-        return view('abouts.edit', ['about'=>$row]);
+        return view('abouts.edit', ['about' => $row]);
     }
 
     /**
@@ -84,17 +102,33 @@ class AboutController extends Controller
      */
     public function update(Request $request, $id)
     {
-                //validations
-                $request->validate([
-                    'title'=>'required|string|max:255|min:3|unique:abouts,name',
-                    'link'=>'required|string|max:255|min:3|url',
-                     'description'=> 'required|string',
-                     'status'=> 'required|in:on,off'
+        if ($row = About::find($id)) {
+            //validations
+            $request->validate([
+                'title' => 'required|string|max:255|min:3|unique:abouts,title,'. $id,
+               // 'link' => 'required|string|max:255|min:3|url',
+                'description' => 'required|string',
+                'status' => 'required|in:on,off',
+                'year' => 'required|string',
 
+
+            ]);
+            $data = $request->except(['_token', 'image']);
+            if ($request->hasfile('image')) {
+                $image = $request->file('image');
+                $request->validate([
+                    'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
                 ]);
-                $row = About::find($id);
-                $row->update($request->except(['_token','_method']));
-                return redirect()->route('abouts.index',['about'=>$row->id])->with('success', 'About Has Been Updated Successfully');
+                $image_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move('images/about', $image_name);
+                $data['image'] = $image_name;
+                if ($row->image) {
+                    unlink('images/about/' . $row->image);
+                }
+            }
+        }
+        $row->update($data);
+        return redirect()->route('abouts.index')->with('success', 'About Has Been Updated Successfully');
     }
 
     /**
@@ -105,7 +139,11 @@ class AboutController extends Controller
      */
     public function destroy($id)
     {
-        if($row = About::find($id)) {
+        if ($row = About::find($id)) {
+            if($row->image) {
+
+                unlink('images/about/',$row->image);
+            }
             $row->delete();
             return redirect()->route('abouts.index')->with('success', 'About Has Been Deleted Successfully');
         }

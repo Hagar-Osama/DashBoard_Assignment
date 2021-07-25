@@ -39,16 +39,15 @@ Dashboard | Services
                             <td>{{$service->id}}</td>
                             <td>{{$service->name}}</td>
                             <td>@if(empty($service->icon))
-                                <span>No Icon</span>
-                                @else
-                            <td>{{$service->icon}}</td>
-                            @endif
-                            </td>
+                                No Icon</td>
+                            <td>@else
+                            {{$service->icon}}
+                            @endif</td>
                             <td><a href="{{route('services.edit',['id'=>$service->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>
                                 <form action="{{route('services.destroy', ['id'=>$service->id])}}" method="POST">
                                     @csrf
-                                    {{{method_field('DELETE')}}}
+                                    {{method_field('DELETE')}}
                                     <input type="submit" name="delete" value = "Delete" class="btn btn-danger">
 
                                 </form>

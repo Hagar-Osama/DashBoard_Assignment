@@ -12,10 +12,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $profile = profile::find($id);
-        dd($profile->user);
+        // $profile = profile::find($id);
+        // dd($profile->user);
+        $profiles = profile::first();
+                 dd($profiles);
+
     }
 
     /**

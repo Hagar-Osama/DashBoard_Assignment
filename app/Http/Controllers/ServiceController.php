@@ -89,7 +89,7 @@ class ServiceController extends Controller
        // dd($id);
         //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:services,name',
+            'name'=>'required|string|max:255|min:3|unique:services,name,'.$id,
             'icon'=>'required|string|max:255|min:3',
              'description'=> 'required|string',
              'status'=> 'required|in:on,off'
@@ -97,7 +97,7 @@ class ServiceController extends Controller
         ]);
         $row = Service::find($id);
         $row->update($request->except(['_token','_method']));
-        return redirect()->route('services.index',['id'=>$row->id])->with('success', 'Service Has Been Updated Successfully');
+        return redirect()->route('services.index')->with('success', 'Service Has Been Updated Successfully');
     }
 
     /**

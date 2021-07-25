@@ -13,22 +13,13 @@ Create | portfolios
             </div>
             <h2>Portfolio Create</h2>
             <div>
-                <form action="{{route('portfolios.store')}}" method="POST">
+                <form action="{{route('portfolios.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Name:</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="portfoilo name" name="name" value="{{old('name')}}">
                     </div>
                     @error('name')
-                    <div class="alert alert-danger">
-                        <span class="alert-danger">{{$message}}</span>
-                    </div>
-                    @enderror
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Image:</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="portfolio image" name="image" value="{{old('image')}}">
-                    </div>
-                    @error('image')
                     <div class="alert alert-danger">
                         <span class="alert-danger">{{$message}}</span>
                     </div>
@@ -52,6 +43,15 @@ Create | portfolios
                     @error('status')
                     <div class="alert alert-danger">
                         <span class="alert-danger">{${message}}</span>
+                    </div>
+                    @enderror
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Image:</label>
+                        <input type="file" name="image">
+                    </div>
+                    @error ('image')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
                     </div>
                     @enderror
                     <button type="submit" class="btn btn-primary">Create</button>

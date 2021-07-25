@@ -15,7 +15,7 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $data = Portfolio::select('id', 'name', 'description')->get();
+        $data = Portfolio::select('id', 'name', 'description','image')->get();
         return view('portfolios.index',['portfolios'=> $data]);
     }
 
@@ -45,7 +45,22 @@ class PortfolioController extends Controller
              'status'=> 'required|in:on,off'
 
         ]);
-        Portfolio::create($request->except(['_token']));
+        if ($request->hasfile('image')) {
+            $request->validate([
+                'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
+
+            ]);
+            $image = $request->file('image');
+            $image_name = rand(). '.'.$image->getClientOriginalExtension();
+            $image->move('images/portfolio', $image_name);
+            Portfolio::create([
+                'name'=>$request->name,
+                'description'=>$request->description,
+                'image'=>$image_name
+            ]);
+
+        }
+       // Portfolio::create($request->except(['_token']));
         return redirect()->route('portfolios.index')->with('success', 'Portfolio Has Been Created Successfully');
     }
 
@@ -88,16 +103,31 @@ class PortfolioController extends Controller
     public function update(Request $request, $id)
     {
        // dd($request);
-        //validations
+       if($row = Portfolio::find($id)){
+            //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:portfolios,name',
-             'description'=> 'required|string',
+            'name'=>'required|string|max:255|min:3|unique:portfolios,name,'.$id,
+             'description'=> 'required|string|max:355|min:5',
              'status'=> 'required|in:on,off'
 
         ]);
-        $row = Portfolio::find($id);
-        $row->update($request->except(['_token','_method']));
-        return redirect()->route('portfolios.index',['portfolio'=>$row->id])->with('success', 'Portfolio Has Been Updated Successfully');
+        $data = $request->except(['_token']);
+        if ($request->hasfile('image')) {
+            $image = $request->file('image');
+            $request->validate([
+                'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
+            ]);
+            $image_name = rand(). '.'.$image->getClientOriginalExtension();
+            $image->move('images/portfolio', $image_name);
+            $data['image'] = $image_name;
+            if ($row->image) {
+                unlink('images/portfolio/'.$row->image);
+            }
+         }
+
+     }
+        $row->update($data);
+        return redirect()->route('portfolios.index')->with('success', 'Portfolio Has Been Updated Successfully');
     }
 
     /**
@@ -109,6 +139,10 @@ class PortfolioController extends Controller
     public function destroy($id)
     {
         if($row = Portfolio::find($id)) {
+            if ($row->image) {
+
+                unlink('images/portfolio/'.$row->image);
+            }
             $row->delete();
             return redirect()->route('portfolios.index')->with('success', 'Portfolio Has Been Deleted Successfully');
         }

@@ -14,7 +14,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $data = Team::select('id', 'name', 'link')->get();
+        $data = Team::select('id', 'name', 'link', 'job', 'image')->get();
         return view('teams.index',['teams'=> $data]);
     }
 
@@ -41,17 +41,34 @@ class TeamController extends Controller
             'name'=>'required|string|max:255|min:3|unique:teams,name',
             'link'=>'required|string|max:255|min:3|url',
              'job'=> 'required|string|max:255|min:3',
-             'description'=> 'required|string',
+            // 'description'=> 'required|string',
+             'facebook_icon'=>'required|string|max:255|min:3',
+             'twitter_icon'=>'required|string|max:255|min:3',
+             'linkedIn'=>'required|string|max:255|min:3',
              'status'=> 'required|in:on,off'
 
         ]);
         if ($request->hasfile('image')) {
             $request->validate([
-                'image' =>
+                'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
 
             ]);
-        }
-        Team::create($request->except(['_token', 'image']));
+
+        $image = $request->file('image');
+        $image_name = rand(). '.' .$image->getClientOriginalExtension();
+        $image->move('images/team', $image_name);
+
+        Team::create([
+            "name" => $request->name,
+            "job" => $request->job,
+            "link" => $request->link,
+            "status" => $request->status,
+            "description" =>$request->description,
+            "image" => $image_name
+
+        ]);
+    }
+       // Team::create($request->except(['_token', 'image']));
         return redirect()->route('teams.index')->with('success', 'team Has Been Created Successfully');
     }
 
@@ -66,7 +83,7 @@ class TeamController extends Controller
 
         $row = Team::findorfail($id);
        // dd($id);
-       // return redirect()->route('pages.index');
+       // return redirect()->route('teams.index');
        return view('teams.show', ['team' => $row]);
     }
 
@@ -91,18 +108,37 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //validations
+        if($row = Team::find($id)) {
+              //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:teams,name',
+            'name'=>'required|string|max:255|min:3|unique:teams,name,'.$id,
             'link'=>'required|string|max:255|min:3|url',
              'job'=> 'required|string|max:255|min:3',
              'description'=> 'required|string',
+             'facebook_icon'=>'required|string|max:255|min:3',
+             'twitter_icon'=>'required|string|max:255|min:3',
+             'linkedIn'=>'required|string|max:255|min:3',
              'status'=> 'required|in:on,off'
 
         ]);
-        $row = Team::find($id);
-        $row->update($request->except(['_token','_method']));
-        return redirect()->route('teams.index',['team'=>$row->id])->with('success', 'team Has Been Updated Successfully');
+        $data = $request->except(['image', '_token']);
+        if($request->hasfile('image')) {
+            $image = $request->file('image');
+            $request->validate([
+                'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
+
+            ]);
+            $image_name = rand(). '.' .$image->getClientOriginalExtension();
+            $image->move('images/team', $image_name);
+            $data['image'] = $image_name;
+            if($row->image) {
+                unlink('images/team/'.$row->image);
+            }
+        }
+    }
+       $row->update($data);
+       // $row->update($request->except(['_token','_method']));
+        return redirect()->route('teams.index')->with('success', 'team Has Been Updated Successfully');
     }
 
     /**
@@ -114,14 +150,17 @@ class TeamController extends Controller
     public function destroy($id)
     {
         if($row = Team::find($id)) {
+            if ($row->image) {
+
+                unlink('images/team/'.$row->image);
+            }
             $row->delete();
             return redirect()->route('teams.index')->with('success', 'team Has Been Deleted Successfully');
+
+
         }
         return abort('404');
 
-      //  if($row = Team::find($id)) {
-       //     unlink($image->image_name);
-       //     $row->delete();
-       // }
+
     }
 }

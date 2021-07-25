@@ -1,6 +1,6 @@
 @extends('backend_layouts.layout')
 @section('title')
-Create | Services
+Create | Team
 @endsection
 @section('content')
 
@@ -37,7 +37,7 @@ Create | Services
                         <label for="exampleFormControlInput1">Job:</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="team job" name="job" value="{{old('job')}}">
                     </div>
-                    @error('description')
+                    @error('job')
                     <div class="alert alert-danger">
                         <span class="alert-danger">{{$message}}</span>
                     </div>
@@ -60,7 +60,7 @@ Create | Services
                     </div>
                     @error('status')
                     <div class="alert alert-danger">
-                        <span class="alert-danger">{${message}}</span>
+                        <span class="alert-danger">{{$message}}</span>
                     </div>
                     @enderror
                     <br>
@@ -70,7 +70,7 @@ Create | Services
                     </div>
                     @error ('image')
                     <div class="alert alert-danger">
-                        <span class="alert-danger">{${message}}</span>
+                        <span class="alert-danger">{{$message}}</span>
                     </div>
                     @enderror
                     <br>

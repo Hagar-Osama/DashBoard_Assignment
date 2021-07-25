@@ -24,6 +24,9 @@ Dashboard | About
                         <tr>
                             <th>#</th>
                             <th>Title</th>
+                            <th>Description</th>
+                            <th>image</th>
+                            <th>Year</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -38,6 +41,10 @@ Dashboard | About
                         <tr>
                             <td>{{$about->id}}</td>
                             <td>{{$about->title}}</td>
+                            <td>{{$about->description}}</td>
+                            <td>{{$about->image}}</td>
+                            <td>{{$about->year}}</td>
+
                             <td><a href="{{route('abouts.show',['about'=>$about->id])}}" class="btn btn-warning">Show</a></td>
                             <td><a href="{{route('abouts.edit',['about'=>$about->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>

@@ -10,6 +10,10 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +42,6 @@ Route::get('/layouts/app', function () {
     return view('layouts/app');
 });
 
-Route::get('/clients', function(){
-    return view('clients');
-});
 
 Route::get('admin', function () {
     return view('services.admin_index');
@@ -58,15 +59,28 @@ Route::resource('pages', PageController::class);
 //Team Routes
 Route::resource('teams',TeamController::class);
 //profile Route
-Route::get('/users/profiles', [UserController::class, 'index'])->name('profile');
+Route::get('/users/profiles', [UserController::class, 'index']);//profile
 //user route
-Route::get('/profiles/{id}', [ProfileController::class, 'index'])->name('users');
+Route::get('/profiles/{id}', [ProfileController::class, 'index']);//users
 //portfolio Routes
 Route::resource('portfolios',PortfolioController::class);
 //About Routes
 Route::resource('abouts',AboutController::class);
 //lang Route
 Route::get('/lang/{lang}', [LangController::class, 'setLang'])->where(['lang' => 'ar|en'])->name('lang');
+//Users Route
+Route::resource('users',UserController::class)->where(['user' =>'[0-9]+']);
+//profile route
+Route::resource('profiles',ProfileController::class)->where(['profile' =>'[0-9]+']);
+//Slider Route
+Route::resource('sliders', SliderController::class);
+//Client Route
+Route::resource('clients', ClientController::class);
+//Brand Route
+Route::resource('brands', BrandController::class);
+//Contact Route
+Route::resource('contacts', ContactController::class);
+
 
 
 

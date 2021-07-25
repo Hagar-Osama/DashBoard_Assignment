@@ -14,7 +14,7 @@ Edit | Services
             <h2>Service Edit</h2>
             <div>
             <form action = "{{route('services.update',['id'=>$service->id])}}" method = "POST">
-            @csrf
+                @csrf
             {{method_field('PUT')}}
   <div class="form-group">
     <label for="exampleFormControlInput1">Name:</label>

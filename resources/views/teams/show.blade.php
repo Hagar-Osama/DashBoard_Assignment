@@ -14,4 +14,7 @@ Show | Team
 {{$team->job}}
 <br>
 {{$team->status}}
+<br>
+{{$team->image}}
+
 @endsection
