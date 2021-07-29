@@ -15,7 +15,11 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        $data = Portfolio::select('id', 'name', 'description','image')->get();
+
+        $data = Portfolio::select('id', 'name', 'description','image', 'service_id','client_id')->get();
+        // foreach ($data as $item) {
+        //     dd($item->service);
+        // }
         return view('portfolios.index',['portfolios'=> $data]);
     }
 
@@ -147,5 +151,11 @@ class PortfolioController extends Controller
             return redirect()->route('portfolios.index')->with('success', 'Portfolio Has Been Deleted Successfully');
         }
         return abort('404');
+    }
+    public function getService($id)
+    {
+        if ($portfolio = Portfolio::find($id)) {
+            return view ('portfolios.service', ['service' => $portfolio->service]);
+        }
     }
 }

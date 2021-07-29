@@ -24,6 +24,7 @@ Dashboard | Clients
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Portfolio Name</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -32,12 +33,13 @@ Dashboard | Clients
                     <tbody>
                         @isset($clients)
                         @if($clients->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($clients as $client)
                         <tr>
                             <td>{{$client->id}}</td>
                             <td>{{$client->name}}</td>
+                            <td>@foreach ($client->portfolios as $portfolio)
+                                {{$portfolio->name}}
+                                @endforeach</td>
                             <td><a href="{{route('clients.show',['client'=>$client->id])}}" class="btn btn-warning">Show</a></td>
                             <td><a href="{{route('clients.edit',['client'=>$client->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>
@@ -48,9 +50,10 @@ Dashboard | Clients
 
                                 </form>
                             </td>
-
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
                     </tbody>
                 </table>
             </div>

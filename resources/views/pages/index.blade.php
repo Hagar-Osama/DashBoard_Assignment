@@ -32,8 +32,6 @@ Dashboard | Pages
                     <tbody>
                         @isset($pages)
                         @if($pages->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($pages as $page)
                         <tr>
                             <td>{{$page->id}}</td>
@@ -51,6 +49,8 @@ Dashboard | Pages
 
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
                     </tbody>
                 </table>
             </div>

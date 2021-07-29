@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class PortfolioSeeder extends Seeder
+class LocationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class PortfolioSeeder extends Seeder
      */
     public function run()
     {
-       // \App\Models\Portfolio::factory(10)->create();
+        \App\Models\Location::factory(20)->create();
 
     }
 }

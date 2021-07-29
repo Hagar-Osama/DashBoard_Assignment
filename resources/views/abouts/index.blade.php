@@ -35,8 +35,6 @@ Dashboard | About
                     <tbody>
                         @isset($abouts)
                         @if($abouts->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($abouts as $about)
                         <tr>
                             <td>{{$about->id}}</td>
@@ -58,6 +56,8 @@ Dashboard | About
 
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
                     </tbody>
                 </table>
             </div>

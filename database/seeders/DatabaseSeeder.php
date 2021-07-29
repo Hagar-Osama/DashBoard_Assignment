@@ -17,12 +17,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Service::factory(20)->create();
         \App\Models\Team::factory(3)->create();
         \App\Models\profile::factory(10)->create();
-        \App\Models\Portfolio::factory(10)->create();
+        \App\Models\Client::factory(20)->create();
+        \App\Models\Portfolio::factory(20)->create();
         \App\Models\About::factory(2)->create();
         \App\Models\Slider::factory(3)->create();
-        \App\Models\Client::factory(6)->create();
         \App\Models\Brand::factory(3)->create();
-        \App\Models\Client::factory(10)->create();
 
 
 

@@ -35,8 +35,6 @@ Dashboard | Team
                     <tbody>
                         @isset($teams)
                         @if($teams->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($teams as $team)
                         <tr>
                             <td>{{$team->id}}</td>
@@ -58,6 +56,8 @@ Dashboard | Team
 
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
                     </tbody>
                 </table>
             </div>

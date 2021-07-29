@@ -34,8 +34,6 @@ Dashboard | Contact
                     <tbody>
                         @isset($contacts)
                         @if($contacts->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($contacts as $contact)
                         <tr>
                             <td>{{$contact->id}}</td>
@@ -56,6 +54,8 @@ Dashboard | Contact
 
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
                     </tbody>
                 </table>
             </div>

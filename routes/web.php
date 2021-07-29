@@ -80,7 +80,10 @@ Route::resource('clients', ClientController::class);
 Route::resource('brands', BrandController::class);
 //Contact Route
 Route::resource('contacts', ContactController::class);
-
+//portfolio Route
+Route::get('service/{id}/portfolios', [ServiceController::class, 'getPortfolios'])->name('services.portfolios');
+//Service Route
+Route::get('portfolios/{id}/service',[PortfolioController::class, 'getService'])->name('portfolios.service');
 
 
 

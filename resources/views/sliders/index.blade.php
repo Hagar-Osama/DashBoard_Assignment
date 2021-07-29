@@ -34,8 +34,6 @@ Dashboard | Slider
                     <tbody>
                         @isset($sliders)
                         @if($sliders->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($sliders as $slider)
                         <tr>
                             <td>{{$slider->id}}</td>
@@ -56,6 +54,8 @@ Dashboard | Slider
 
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
                     </tbody>
                 </table>
             </div>

@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Item extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
-    public function portfolios()
+    
+    public function locations()
     {
-        return $this->hasMany(Portfolio::class);
+        return $this->belongsToMany(Location::class);
     }
- }
+}

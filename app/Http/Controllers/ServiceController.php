@@ -114,4 +114,11 @@ class ServiceController extends Controller
         }
         return abort('404');
     }
+    public function getPortfolios($id)
+    {
+        if ($service = Service::find($id)) {
+            return view('services.portfolios', ['portfolios' => $service->portfolios]);
+
+        }
+    }
 }

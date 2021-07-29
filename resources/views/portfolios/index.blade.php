@@ -25,6 +25,8 @@ Dashboard | Portfolios
                             <th>#</th>
                             <th>Name</th>
                             <th>Image</th>
+                            <th>Service Name</th>
+                            <th>Client Name</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -33,13 +35,13 @@ Dashboard | Portfolios
                     <tbody>
                         @isset($portfolios)
                         @if($portfolios->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($portfolios as $portfolio)
                         <tr>
                             <td>{{$portfolio->id}}</td>
                             <td>{{$portfolio->name}}</td>
                             <td>{{$portfolio->image}}</td>
+                            <td>@if (! empty($portfolio->service))  {{$portfolio->service->name }} @endif</td>
+                            <td>@if (! empty($portfolio->client)) {{$portfolio->client->name}} @endif</td>
                             <td><a href="{{route('portfolios.show',['portfolio'=>$portfolio->id])}}" class="btn btn-warning">Show</a></td>
                             <td><a href="{{route('portfolios.edit',['portfolio'=>$portfolio->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>
@@ -53,6 +55,9 @@ Dashboard | Portfolios
 
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
+
                     </tbody>
                 </table>
             </div>

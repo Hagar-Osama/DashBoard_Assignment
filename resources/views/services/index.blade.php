@@ -24,6 +24,7 @@ Dashboard | Services
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Portfolios</th>
                             <th>Icon</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -32,8 +33,6 @@ Dashboard | Services
                     <tbody>
                         @isset($services)
                         @if($services->count() > 0)
-                        @endif
-                        @endisset
                         @foreach($services as $service)
                         <tr>
                             <td>{{$service->id}}</td>
@@ -43,6 +42,9 @@ Dashboard | Services
                             <td>@else
                             {{$service->icon}}
                             @endif</td>
+                           <td> @foreach ($service->portfolios as $portfolio)
+                            {{ $portfolio->name}}
+                            @endforeach</td>
                             <td><a href="{{route('services.edit',['id'=>$service->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>
                                 <form action="{{route('services.destroy', ['id'=>$service->id])}}" method="POST">
@@ -55,6 +57,8 @@ Dashboard | Services
 
                         </tr>
                         @endforeach
+                        @endif
+                        @endisset
                     </tbody>
                 </table>
             </div>
