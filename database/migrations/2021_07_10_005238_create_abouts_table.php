@@ -18,7 +18,7 @@ class CreateAboutsTable extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('image')->nullable();
-            $table->string('link');
+           // $table->string('link');
             $table->enum('status',['on','off'])->default('on');
             $table->timestamps();
         });

@@ -37,10 +37,10 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required|string|max:255|min:3|',
+            'name'=>'required|string|max:255|min:3',
             'phone' => 'required|integer',
             'message' => 'required|string',
-            'email' =>'required|string|email|max:255|unique:contacts,email'
+            'email' =>'required|string|max:255|unique:contacts,email'
         ]);
         Contact::create($request->except(['_token']));
         return redirect()->route('contacts.index')->with('success', 'Message Has been submitted Successfully');

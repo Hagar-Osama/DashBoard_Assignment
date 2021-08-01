@@ -1,7 +1,14 @@
 <?php
 
+use App\Http\Controllers\Api\ApiAboutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ApiPageController;
+use App\Http\Controllers\Api\ApiBrandController;
+use App\Http\Controllers\Api\ApiClientController;
+use App\Http\Controllers\Api\ApiContactController;
+use App\Http\Controllers\Api\ApiPortfolioController;
+use App\Http\Controllers\Api\ApiServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +24,27 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+//API Pages Routes
+Route::get('pages', [ApiPageController::class, 'index']);
+Route::get('pages/show/{id}',[ApiPageController::class, 'show']);
+Route::post('pages/store',[ApiPageController::class, 'store']);
+
+//API About Routes
+Route::get('abouts', [ApiAboutController::class, 'index']);
+Route::get('abouts/show/{id}',[ApiAboutController::class, 'show']);
+Route::post('abouts/store',[ApiAboutController::class, 'store']);
+
+//API Brand Routes
+Route::apiResource('brands', ApiBrandController::class);
+
+//API Client Routes
+Route::apiResource('clients', ApiClientController::class);
+
+//API Contact Routes
+Route::apiResource('contacts', ApiContactController::class);
+
+//API Service Routes
+Route::apiResource('services', ApiServiceController::class);
+//API Portfolio Route
+Route::apiResource('portfolios', ApiPortfolioController::class);
+

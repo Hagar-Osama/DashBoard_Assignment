@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Portfolio;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\PortfolioResource;
+
+class ApiPortfolioController extends Controller
+{
+    public function index()
+    {
+        $portfolios = Portfolio::all();
+        return PortfolioResource::collection($portfolios);
+    }
+
+    public function show($id)
+    {
+        $portfolio = Portfolio::findorfail($id);
+        return new PortfolioResource($portfolio);
+
+    }
+
+    public function store(Request $request)
+    {
+       // dd($request->all());
+        $validate = Validator::make($request->all(),[
+            'name'=>'required|string|max:255|min:3|unique:portfolios,name',
+             'description'=> 'required|string|max:255|min:5',
+             'status'=> 'required|in:on,off'
+        ]);
+        if ($request->hasfile('image')) {
+            $validate = Validator::make($request->all(),[
+                'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
+            ]);
+            $image = $request->file('image');
+            $image_name = rand(). '.' .$image->getClientOriginalExtension();
+            $image->move('images/portfolio', $image_name);
+
+            if ($validate->fails()) {
+                return response()->json($validate->errors());
+            }
+            Portfolio::create([
+                    "name" => $request->name,
+                    "status" => $request->status,
+                    "description" =>$request->description,
+                    "client_id" =>$request->client_id,
+                    "service_id" =>$request->service_id,
+                    "image" => $image_name
+
+            ]);
+        }
+            return response()->json('Data Has Been Stored Successfully');
+
+    }
+}

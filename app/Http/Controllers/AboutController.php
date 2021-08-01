@@ -14,7 +14,7 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $data = About::select('id', 'title', 'link', 'description', 'image', 'year')->get();
+        $data = About::select('id', 'title', 'description', 'image', 'year')->get();
         return view('abouts.index', ['abouts' => $data]);
     }
 
