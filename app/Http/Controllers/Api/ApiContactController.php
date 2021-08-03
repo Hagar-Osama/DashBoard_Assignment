@@ -39,6 +39,32 @@ class ApiContactController extends Controller
         return response()->json('Data Has Been Stored Successfully');
 
     }
+    public function update(Request $request, $id)
+    {
+        if ($row = Contact::find($id)) {
+            $validate = Validator::make($request->all(),[
+                'name'=>'required|string|max:255|min:3',
+                'phone' => 'required|integer',
+                'message' => 'required|string',
+                'email' =>'required|string|email|max:255|unique:contacts,email,'.$id
+            ]);
+            if ($validate->fails()) {
+                return response()->json($validate->errors());
+            }
+            $row->update($request->except(['_token']));
+            return response()->json('Data Has Been Updated Successfully');
+
+        }
+    }
+
+    public function destroy($id)
+    {
+        if ($row = Contact::find($id)) {
+            $row->delete();
+            return response()->json('Data Has Been Deleted Successfully');
+        }
+        return response()->json('Data Has Not Been Found');
+    }
 
 
 }

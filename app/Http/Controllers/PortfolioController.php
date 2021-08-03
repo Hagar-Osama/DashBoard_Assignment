@@ -152,10 +152,10 @@ class PortfolioController extends Controller
         }
         return abort('404');
     }
-    public function getService($id)
-    {
-        if ($portfolio = Portfolio::find($id)) {
-            return view ('portfolios.service', ['service' => $portfolio->service]);
-        }
-    }
+    // public function getService($id)
+    // {
+    //     if ($portfolio = Portfolio::find($id)) {
+    //         return view ('portfolios.service', ['service' => $portfolio->service]);
+    //     }
+    // }
 }

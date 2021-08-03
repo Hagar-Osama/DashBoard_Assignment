@@ -17,6 +17,17 @@ class User extends Authenticatable
 
         }
 
+        public function role()
+        {
+            return $this->hasone(Role::class);
+        }
+
+
+         public function isAdmin()
+         {
+             return $this->role()->role == "admin";
+         }
+
     /**
      * The attributes that are mass assignable.
      *

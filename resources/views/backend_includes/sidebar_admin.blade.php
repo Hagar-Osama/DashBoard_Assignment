@@ -62,6 +62,12 @@
                                 Contact
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('users.index')}}">
+                                <span data-feather="file"></span>
+                                Users
+                            </a>
+                        </li>
 
                 </div>
             </nav>

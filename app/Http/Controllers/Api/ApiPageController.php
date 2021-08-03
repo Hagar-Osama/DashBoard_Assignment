@@ -40,4 +40,33 @@ class ApiPageController extends Controller
         return response()->json('Data Has Been Stored Successfully');
 
     }
+
+    public function update(Request $request, $id)
+    {
+        $row = Page::find($id);
+        if ($row) {
+            //validations
+            $validate = Validator::make($request->all(),[
+                'name' => 'required|string|max:255|min:3|unique:pages,name,'.$id,
+                'link' => 'required|string|max:255|min:3|url',
+                'order' => 'required|integer|numeric',
+                'status' => 'required|in:on,off'
+
+            ]);
+            if ($validate->fails()) {
+                return response()->json($validate->errors());
+            }
+            $row->update($request->except(['_token', '_method']));
+            return response()->json('Data Has Been Updated Successfully');
+        }
+    }
+
+    public function destroy($id)
+    {
+        if ($row = Page::find($id)) {
+            $row->delete();
+            return response()->json('Data Has Been Deleted Successfully');
+        }
+        return response()->json('Data Has Not Been Found');
+    }
 }

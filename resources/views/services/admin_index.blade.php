@@ -15,6 +15,7 @@ INDEX | Dashboard
             <h2>Section title</h2>
 
         </main>
+        
     </div>
 </div>
 @endsection

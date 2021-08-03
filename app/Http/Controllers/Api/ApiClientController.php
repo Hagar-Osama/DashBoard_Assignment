@@ -22,8 +22,8 @@ class ApiClientController extends Controller
     }
     public function store(Request $request)
     {
-        $validate = Validator::make($request->all(),[
-            'name'=>'required|string|max:255|min:3|unique:clients,name',
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|min:3|unique:clients,name',
 
         ]);
         if ($validate->fails()) {
@@ -31,6 +31,29 @@ class ApiClientController extends Controller
         }
         Client::create($request->except(['_token']));
         return response()->json('Data Has Been Stored Successfully');
+    }
 
+    public function update(Request $request, $id)
+    {
+        if ($row = Client::find($id)) {
+            $validate = Validator::make($request->all(),[
+            'name' => 'required|string|max:255|min:3|unique:clients,name,'. $id
+
+            ]);
+            if ($validate->fails()) {
+                return response()->json($validate->errors());
+            }
+            $row->update($request->except('_token'));
+            return response()->json('Data Has Been Updated Successfully');
+        }
+    }
+
+    public function destroy($id)
+    {
+        if ($row = Client::find($id)) {
+            $row->delete();
+            return response()->json('Data Has Been Deleted Successfully');
+        }
+        return response()->json('Data Has Not Been Found');
     }
 }

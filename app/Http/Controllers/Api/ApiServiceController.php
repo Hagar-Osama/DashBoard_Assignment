@@ -25,11 +25,11 @@ class ApiServiceController extends Controller
 
     public function store(Request $request)
     {
-        $validate = Validator::make($request->all(),[
-            'name'=>'required|string|max:255|min:3|unique:services,name',
-            'icon'=>'required|string|max:255|min:3',
-             'description'=> 'required|string',
-             'status'=> 'required|in:on,off'
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string|max:255|min:3|unique:services,name',
+            'icon' => 'required|string|max:255|min:3',
+            'description' => 'required|string',
+            'status' => 'required|in:on,off'
 
         ]);
         if ($validate->fails()) {
@@ -37,8 +37,36 @@ class ApiServiceController extends Controller
         }
         Service::create($request->except(['_token']));
         return response()->json('Data Has Been Stored Successfully');
+    }
 
+    public function update(Request $request, $id)
+    {
+        // dd($id);
+        if ($row = Service::find($id)) {
+
+            //validations
+            $validate = Validator::make($request->all(), [
+                'name' => 'required|string|max:255|min:3|unique:services,name,' . $id,
+                'icon' => 'required|string|max:255|min:3',
+                'description' => 'required|string',
+                'status' => 'required|in:on,off'
+
+            ]);
+            if ($validate->fails()) {
+                return response()->json($validate->errors());
+            }
+            $row->update($request->except(['_token', '_method']));
+            return response()->json('Data Has Been Updated Successfully');
+        }
     }
 
 
+    public function destroy($id)
+    {
+        if ($row = Service::find($id)) {
+            $row->delete();
+            return response()->json('Data Has Been Deleted Successfully');
+        }
+        return response()->json('Data Has Not Been Found');
+    }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +70,7 @@ Route::resource('abouts',AboutController::class);
 //lang Route
 Route::get('/lang/{lang}', [LangController::class, 'setLang'])->where(['lang' => 'ar|en'])->name('lang');
 //Users Route
-Route::resource('users',UserController::class)->where(['user' =>'[0-9]+']);
+Route::resource('users',UserController::class)->where(['user' =>'[0-9]+'])->middleware('role');
 //profile route
 Route::resource('profiles',ProfileController::class)->where(['profile' =>'[0-9]+']);
 //Slider Route
@@ -80,10 +81,14 @@ Route::resource('clients', ClientController::class);
 Route::resource('brands', BrandController::class);
 //Contact Route
 Route::resource('contacts', ContactController::class);
-//portfolio Route
-Route::get('service/{id}/portfolios', [ServiceController::class, 'getPortfolios'])->name('services.portfolios');
-//Service Route
-Route::get('portfolios/{id}/service',[PortfolioController::class, 'getService'])->name('portfolios.service');
+
+//////////relationship////////
+// //portfolio Route
+// Route::get('service/{id}/portfolios', [ServiceController::class, 'getPortfolios'])->name('services.portfolios');
+// //Service Route
+// Route::get('portfolios/{id}/service',[PortfolioController::class, 'getService'])->name('portfolios.service');
+
+
 
 
 

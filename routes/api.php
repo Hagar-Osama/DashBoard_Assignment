@@ -28,11 +28,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('pages', [ApiPageController::class, 'index']);
 Route::get('pages/show/{id}',[ApiPageController::class, 'show']);
 Route::post('pages/store',[ApiPageController::class, 'store']);
+Route::post('pages/update/{id}',[ApiPageController::class, 'update']);
+Route::delete('pages/destroy/{id}',[ApiPageController::class, 'destroy']);
+
+
 
 //API About Routes
 Route::get('abouts', [ApiAboutController::class, 'index']);
 Route::get('abouts/show/{id}',[ApiAboutController::class, 'show']);
 Route::post('abouts/store',[ApiAboutController::class, 'store']);
+Route::post('abouts/update/{id}',[ApiAboutController::class, 'update']);
+Route::delete('abouts/destroy/{id}',[ApiAboutController::class, 'destroy']);
+
+
 
 //API Brand Routes
 Route::apiResource('brands', ApiBrandController::class);

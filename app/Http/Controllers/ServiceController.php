@@ -86,8 +86,9 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-       // dd($id);
-        //validations
+       if ($row = Service::find($id)) {
+         //  dd($id);
+           //validations
         $request->validate([
             'name'=>'required|string|max:255|min:3|unique:services,name,'.$id,
             'icon'=>'required|string|max:255|min:3',
@@ -95,9 +96,12 @@ class ServiceController extends Controller
              'status'=> 'required|in:on,off'
 
         ]);
-        $row = Service::find($id);
+
         $row->update($request->except(['_token','_method']));
         return redirect()->route('services.index')->with('success', 'Service Has Been Updated Successfully');
+
+       }
+
     }
 
     /**
@@ -114,11 +118,11 @@ class ServiceController extends Controller
         }
         return abort('404');
     }
-    public function getPortfolios($id)
-    {
-        if ($service = Service::find($id)) {
-            return view('services.portfolios', ['portfolios' => $service->portfolios]);
+    // public function getPortfolios($id)
+    // {
+    //     if ($service = Service::find($id)) {
+    //         return view('services.portfolios', ['portfolios' => $service->portfolios]);
 
-        }
-    }
+    //     }
+    // }
 }

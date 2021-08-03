@@ -55,4 +55,51 @@ class ApiPortfolioController extends Controller
             return response()->json('Data Has Been Stored Successfully');
 
     }
+
+    public function update(Request $request, $id)
+    {
+       // dd($request);
+       if($row = Portfolio::find($id)){
+            //validations
+            $validate = Validator::make($request->all(),[
+            'name'=>'required|string|max:255|min:3|unique:portfolios,name,'.$id,
+             'description'=> 'required|string|max:355|min:5',
+             'status'=> 'required|in:on,off'
+
+        ]);
+        $data = $request->except(['_token']);
+        if ($request->hasfile('image')) {
+            $image = $request->file('image');
+            $validate = Validator::make($request->all(),[
+                'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
+            ]);
+            if ($validate->fails()) {
+                return response()->json($validate->errors());
+            }
+            $image_name = rand(). '.'.$image->getClientOriginalExtension();
+            $image->move('images/portfolio', $image_name);
+            $data['image'] = $image_name;
+            if ($row->image) {
+                unlink('images/portfolio/'.$row->image);
+            }
+         }
+
+     }
+        $row->update($data);
+        return response()->json('Data Has Been Updated Successfully');
+    }
+
+    public function destroy($id)
+    {
+        if($row = Portfolio::find($id)) {
+            if ($row->image) {
+
+                unlink('images/portfolio/'.$row->image);
+            }
+            $row->delete();
+            return response()->json('Data Has Been Deleted Successfully');
+        }
+        return response()->json('Data Has Not Been Found');
+    }
+
 }

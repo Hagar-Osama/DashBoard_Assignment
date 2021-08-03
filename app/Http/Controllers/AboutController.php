@@ -60,6 +60,7 @@ class AboutController extends Controller
             "title" => $request->title,
             "status" => $request->status,
             "description" =>$request->description,
+            'year' =>$request->year,
             "image" => $image_name
 
         ]);
@@ -142,7 +143,7 @@ class AboutController extends Controller
         if ($row = About::find($id)) {
             if($row->image) {
 
-                unlink('images/about/',$row->image);
+                unlink('images/about/'.$row->image);
             }
             $row->delete();
             return redirect()->route('abouts.index')->with('success', 'About Has Been Deleted Successfully');

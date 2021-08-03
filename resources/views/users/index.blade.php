@@ -26,6 +26,7 @@ Dashboard | User
                             <th>Name</th>
                             <th>Email</th>
                             <th>Profile Name</th>
+                            <th>Role</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -42,7 +43,7 @@ Dashboard | User
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{! empty($user->profile) ? $user->profile->name : ''}}</td>
-
+                            <td>{{! empty($user->role) ? $user->role->role : ''}}</td>
                             <td><a href="{{route('users.show',['user'=>$user->id])}}" class="btn btn-warning">Show</a></td>
                             <td><a href="{{route('users.edit',['user'=>$user->id])}}" class="btn btn-warning">Edit</a></td>
                             <td>
