@@ -17,12 +17,11 @@ class Role
      */
     public function handle(Request $request, Closure $next)
      {
-        // echo 'middle ware';
-        //if ($request->User()->isAdmin() == 'admin') {
+        
 
              return $next($request);
 
-      //   }
+
 
 
 
