@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\ApiClientController;
 use App\Http\Controllers\Api\ApiContactController;
 use App\Http\Controllers\Api\ApiPortfolioController;
 use App\Http\Controllers\Api\ApiServiceController;
+use App\Http\Controllers\Api\ApiSliderController;
+use App\Http\Controllers\Api\ApiTeamController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +56,13 @@ Route::apiResource('contacts', ApiContactController::class);
 
 //API Service Routes
 Route::apiResource('services', ApiServiceController::class);
+
 //API Portfolio Route
 Route::apiResource('portfolios', ApiPortfolioController::class);
+
+//api Team route
+Route::apiResource('teams', ApiTeamcontroller::class);
+
+//api slider Route
+Route::apiResource('sliders', ApiSliderController::class);
 
