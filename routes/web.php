@@ -45,8 +45,8 @@ Route::get('/layouts/app', function () {
 
 
 Route::get('admin', function () {
-    return view('services.admin_index');
-})->name('admin.index');
+    return view('admin');
+})->name('admin.index')->middleware('role');
 
 Route::get('/services/index', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
@@ -56,7 +56,7 @@ Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->where(['i
 Route::put('/services/update/{id}', [ServiceController::class, 'update'])->where(['id' =>'[0-9]+'])->name('services.update');
 Route::delete('/services/{id}', [ServiceController::class, 'destroy'])->where(['id' =>'[0-9]+'])->name('services.destroy');
 //pages Routes
-Route::resource('pages', PageController::class);
+Route::resource('pages', PageController::class)->middleware('auth');
 //Team Routes
 Route::resource('teams',TeamController::class);
 //profile Route

@@ -51,7 +51,7 @@ class ApiContactController extends Controller
             if ($validate->fails()) {
                 return response()->json($validate->errors());
             }
-            $row->update($request->except(['_token']));
+            $row->update($request->all());
             return response()->json('Data Has Been Updated Successfully');
 
         }

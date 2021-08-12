@@ -43,8 +43,8 @@ class ApiPageController extends Controller
 
     public function update(Request $request, $id)
     {
-        $row = Page::find($id);
-        if ($row) {
+
+        if ($row = Page::find($id)) {
             //validations
             $validate = Validator::make($request->all(),[
                 'name' => 'required|string|max:255|min:3|unique:pages,name,'.$id,
@@ -56,7 +56,7 @@ class ApiPageController extends Controller
             if ($validate->fails()) {
                 return response()->json($validate->errors());
             }
-            $row->update($request->except(['_token', '_method']));
+            $row->update($request->all());
             return response()->json('Data Has Been Updated Successfully');
         }
     }

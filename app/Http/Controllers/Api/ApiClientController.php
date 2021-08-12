@@ -35,6 +35,7 @@ class ApiClientController extends Controller
 
     public function update(Request $request, $id)
     {
+       // dd($request->all());
         if ($row = Client::find($id)) {
             $validate = Validator::make($request->all(),[
             'name' => 'required|string|max:255|min:3|unique:clients,name,'. $id
@@ -43,7 +44,7 @@ class ApiClientController extends Controller
             if ($validate->fails()) {
                 return response()->json($validate->errors());
             }
-            $row->update($request->except('_token'));
+            $row->update($request->all());
             return response()->json('Data Has Been Updated Successfully');
         }
     }

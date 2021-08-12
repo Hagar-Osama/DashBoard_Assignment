@@ -20,11 +20,16 @@ class RoleFactory extends Factory
      * @return array
      */
     public function definition()
-    {
-        $users = \App\Models\User::select('id')->get()->toArray();
-        static $counter = 0;
-        return [
-            'user_id'=>$users[$counter++]['id']
-        ];
+     {
+       return [
+            'name' => $this->faker->name()
+
+         ];
+
+        // $users = \App\Models\User::select('id')->get()->toArray();
+        // static $counter = 0;
+        // return [
+        //     'user_id'=>$users[$counter++]['id']
+        // ];
     }
 }

@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\ApiPortfolioController;
 use App\Http\Controllers\Api\ApiServiceController;
 use App\Http\Controllers\Api\ApiSliderController;
 use App\Http\Controllers\Api\ApiTeamController;
-
+use App\Http\Controllers\Api\ApiUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ Route::apiResource('clients', ApiClientController::class);
 Route::apiResource('contacts', ApiContactController::class);
 
 //API Service Routes
-Route::apiResource('services', ApiServiceController::class);
+Route::apiResource('services', ApiServiceController::class)->middleware('auth:sanctum');
 
 //API Portfolio Route
 Route::apiResource('portfolios', ApiPortfolioController::class);
@@ -65,4 +65,7 @@ Route::apiResource('teams', ApiTeamcontroller::class);
 
 //api slider Route
 Route::apiResource('sliders', ApiSliderController::class);
+
+//api user route
+Route::post('register', [ApiUserController::class, 'register'])->middleware('auth:sanctum');
 

@@ -42,7 +42,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255|min:3|unique:users,name',
             'email' =>'required|string|max:255|unique:contacts,email',
             'password' =>'required|min:8|',
-           // 'role' => 'required|in:admin,user'
 
         ]);
         User::create($request->except(['_token']));

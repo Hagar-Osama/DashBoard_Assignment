@@ -107,7 +107,6 @@ class AboutController extends Controller
             //validations
             $request->validate([
                 'title' => 'required|string|max:255|min:3|unique:abouts,title,'. $id,
-               // 'link' => 'required|string|max:255|min:3|url',
                 'description' => 'required|string',
                 'status' => 'required|in:on,off',
                 'year' => 'required|string',

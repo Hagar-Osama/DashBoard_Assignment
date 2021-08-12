@@ -17,9 +17,13 @@ class Role
      */
     public function handle(Request $request, Closure $next)
      {
-        
+        $userRole = $request->user()->role->name;
+        if ($userRole === 'admin') {
+           // return redirect()-route('admin');
+            return $next($request);
+        }
+        return redirect()->route('welcome');
 
-             return $next($request);
 
 
 
