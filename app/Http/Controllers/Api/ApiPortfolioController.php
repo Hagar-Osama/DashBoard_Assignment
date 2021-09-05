@@ -27,7 +27,7 @@ class ApiPortfolioController extends Controller
     {
        // dd($request->all());
         $validate = Validator::make($request->all(),[
-            'name'=>'required|string|max:255|min:3|unique:portfolios,name',
+            'name'=>'required|string|max:255|min:3|',
              'description'=> 'required|string|max:255|min:5',
              'status'=> 'required|in:on,off'
         ]);
@@ -35,13 +35,14 @@ class ApiPortfolioController extends Controller
             $validate = Validator::make($request->all(),[
                 'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
             ]);
+            if ($validate->fails()) {
+                return response()->json($validate->errors());
+            }
             $image = $request->file('image');
             $image_name = rand(). '.' .$image->getClientOriginalExtension();
             $image->move('images/portfolio', $image_name);
 
-            if ($validate->fails()) {
-                return response()->json($validate->errors());
-            }
+
             Portfolio::create([
                     "name" => $request->name,
                     "status" => $request->status,
@@ -62,7 +63,7 @@ class ApiPortfolioController extends Controller
        if($row = Portfolio::find($id)){
             //validations
             $validate = Validator::make($request->all(),[
-            'name'=>'required|string|max:255|min:3|unique:portfolios,name,'.$id,
+            'name'=>'required|string|max:255|min:3',
              'description'=> 'required|string|max:355|min:5',
              'status'=> 'required|in:on,off'
 

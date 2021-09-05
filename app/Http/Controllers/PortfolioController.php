@@ -44,9 +44,11 @@ class PortfolioController extends Controller
       // dd($request);
         //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:portfolios,name',
-             'description'=> 'required|string|max:255|min:5',
-             'status'=> 'required|in:on,off'
+            'name'=>'required|string|max:255|min:3',
+             'description'=> 'required|string|max:3000|min:5',
+             'status'=> 'required|in:on,off',
+             'service_id' =>'required|integer',
+             'client_id' => 'required|integer'
 
         ]);
         if ($request->hasfile('image')) {
@@ -60,6 +62,8 @@ class PortfolioController extends Controller
             Portfolio::create([
                 'name'=>$request->name,
                 'description'=>$request->description,
+                'service_id'=>$request->service_id,
+                'client_id'=>$request->client_id,
                 'image'=>$image_name
             ]);
 
@@ -110,9 +114,11 @@ class PortfolioController extends Controller
        if($row = Portfolio::find($id)){
             //validations
         $request->validate([
-            'name'=>'required|string|max:255|min:3|unique:portfolios,name,'.$id,
+            'name'=>'required|string|max:255|min:3|',
              'description'=> 'required|string|max:355|min:5',
-             'status'=> 'required|in:on,off'
+             'status'=> 'required|in:on,off',
+             'service_id' =>'required|integer',
+             'client_id' => 'required|integer'
 
         ]);
         $data = $request->except(['_token']);

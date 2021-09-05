@@ -51,7 +51,7 @@ Create | Services
                     </div>
                     @error('status')
                     <div class="alert alert-danger">
-                        <span class="alert-danger">{${message}}</span>
+                        <span class="alert-danger">{{$message}}</span>
                     </div>
                     @enderror
                     <button type="submit" class="btn btn-primary">Create</button>

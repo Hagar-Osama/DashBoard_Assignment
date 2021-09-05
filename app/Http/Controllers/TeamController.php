@@ -41,7 +41,7 @@ class TeamController extends Controller
             'name'=>'required|string|max:255|min:3|unique:teams,name',
             'link'=>'required|string|max:255|min:3|url',
              'job'=> 'required|string|max:255|min:3',
-            // 'description'=> 'required|string',
+             'description'=> 'required|string',
              'facebook_icon'=>'required|string|max:255|min:3',
              'twitter_icon'=>'required|string|max:255|min:3',
              'linkedIn'=>'required|string|max:255|min:3',
@@ -64,6 +64,9 @@ class TeamController extends Controller
             "link" => $request->link,
             "status" => $request->status,
             "description" =>$request->description,
+            'facebook_icon'=>$request->facebook_icon,
+             'twitter_icon'=>$request->twitter_icon,
+             'linkedIn'=>$request->linkedIn,
             "image" => $image_name
 
         ]);
@@ -121,7 +124,7 @@ class TeamController extends Controller
              'status'=> 'required|in:on,off'
 
         ]);
-        $data = $request->except(['image', '_token']);
+        $data = $request->except(['_token']);
         if($request->hasfile('image')) {
             $image = $request->file('image');
             $request->validate([

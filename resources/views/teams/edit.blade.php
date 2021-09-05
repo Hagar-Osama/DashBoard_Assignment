@@ -45,7 +45,7 @@ Edit | Team
                     @enderror
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Facebook Icon:</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="facebook icon" name="facebook_icon" value="{{old('facebook_icon')}}">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="facebook icon" name="facebook_icon" value="{{$team->facebook_icon}}">
                     </div>
                     @error('icon')
                     <div class="alert alert-danger">
@@ -54,7 +54,7 @@ Edit | Team
                     @enderror
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Twitter Icon:</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="twitter icon" name="twitter_icon" value="{{old('twitter_icon')}}">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="twitter icon" name="twitter_icon" value="{{$team->twitter_icon}}">
                     </div>
                     @error('icon')
                     <div class="alert alert-danger">
@@ -63,7 +63,7 @@ Edit | Team
                     @enderror
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Linkedin Icon:</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="linkedin icon" name="linkedIn" value="{{old('linkedIn')}}">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="linkedin icon" name="linkedIn" value="{{$team->linkedIn}}">
                     </div>
                     @error('icon')
                     <div class="alert alert-danger">

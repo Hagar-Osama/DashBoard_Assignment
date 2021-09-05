@@ -28,13 +28,14 @@ class ApiBrandController extends Controller
         $validate = Validator::make($request->all(),[
             'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
         ]);
+        if ($validate->fails()) {
+            return response()->json($validate->errors());
+        }
         $image = $request->file('image');
         $image_name = rand(). '.' .$image->getClientOriginalExtension();
         $image->move('images/brands', $image_name);
 
-        if ($validate->fails()) {
-            return response()->json($validate->errors());
-        }
+
         Brand::create([
             "image" =>$image_name
 

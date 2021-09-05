@@ -9,5 +9,5 @@ Show | Contact
 <br>
 {{$contact->email}}
 <br>
-{{$conatct->phone}}
+{{$contact->phone}}
 @endsection

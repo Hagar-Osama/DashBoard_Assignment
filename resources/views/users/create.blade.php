@@ -49,7 +49,7 @@ Create | User
                             <option value="user">User</option>
                         </select>
                     </div>
-                    @error('status')
+                    @error('role')
                     <div class="alert alert-danger">
                         <span class="alert-danger">{{$message}}</span>
                     </div>

@@ -34,6 +34,24 @@ Create | portfolios
                     </div>
                     @enderror
                     <div class="form-group">
+                        <label for="exampleFormControlInput1">Service ID:</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="service id" name="service_id" value="{{old('service_id')}}">
+                    </div>
+                    @error('service_id')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Client ID:</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="client id" name="client_id" value="{{old('client_id')}}">
+                    </div>
+                    @error('client_id')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                    <div class="form-group">
                         <label for="exampleFormControlSelect1">Status:</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="status">
                             <option value="on">On</option>
@@ -42,7 +60,7 @@ Create | portfolios
                     </div>
                     @error('status')
                     <div class="alert alert-danger">
-                        <span class="alert-danger">{${message}}</span>
+                        <span class="alert-danger">{{$message}}</span>
                     </div>
                     @enderror
                     <div class="form-group">

@@ -21,7 +21,7 @@ class HomeController extends Controller
         $slider = Slider::select('id', 'title', 'description')->where('status', '=', 'on')->get();
         $clients = Client::select('id', 'name')->get();
         $brands = Brand::select('id', 'image')->where('status', '=', 'on')->get();
-      //  $portfolios = Portfolio::select('id', 'name', 'description', 'image')->where('status', '=', 'on')->get();
+        $portfolios = Portfolio::select('id', 'name','description','image', 'client_id', 'service_id')->where('status', '=', 'on')->get();
 
 
 
@@ -32,7 +32,7 @@ class HomeController extends Controller
                                'sliders' => $slider,
                                'clients' =>$clients,
                                'brands' =>$brands,
-                              // 'porfolios' =>$portfolios
+                               'portfolios' =>$portfolios
                             ]);
 
     }
@@ -45,7 +45,7 @@ class HomeController extends Controller
     }
     public function getPortfolio()
     {
-        $portfolios = Portfolio::select('id', 'name','description','image')->where('status', '=', 'on')->get();
+        $portfolios = Portfolio::select('id', 'name','description','image', 'client_id', 'service_id')->where('status', '=', 'on')->get();
 
         return view('portfolio', ['portfolios' =>$portfolios]);
     }

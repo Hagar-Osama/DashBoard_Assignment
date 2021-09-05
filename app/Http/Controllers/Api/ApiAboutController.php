@@ -31,20 +31,20 @@ class ApiAboutController extends Controller
             'description' => 'required|string',
             'status' => 'required|in:on,off',
             'year' => 'required|string',
-           // 'link' => 'required|string|max:255|min:3|url',
         ]);
 
          if ($request->hasfile('image')) {
         $validate = Validator::make($request->all(),[
             'image' => 'image|mimes:png,jpg,svg,gif|max:2048'
         ]);
+        if ($validate->fails()) {
+            return response()->json($validate->errors());
+        }
         $image = $request->file('image');
         $image_name = rand(). '.' .$image->getClientOriginalExtension();
         $image->move('images/about', $image_name);
 
-        if ($validate->fails()) {
-            return response()->json($validate->errors());
-        }
+
         About::create([
                 "title" => $request->title,
                 "status" => $request->status,

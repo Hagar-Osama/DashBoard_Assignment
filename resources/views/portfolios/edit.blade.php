@@ -25,6 +25,14 @@ Edit | Portfolios
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{$portfolio->description}}</textarea>
                     </div>
                     <div class="form-group">
+                        <label for="exampleFormControlInput1">Service ID:</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="service id" name="service_id" value="{{$portfolio->service_id}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Client ID:</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="client id" name="client_id" value="{{$portfolio->client_id}}">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleFormControlSelect1">Status:</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="status">
                             <option value="on" @if($portfolio->status=='on') selected @else "" @endif>On</option>

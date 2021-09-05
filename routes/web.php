@@ -39,9 +39,9 @@ Route::get('/contact',[HomeController::class, 'getContact'])->name('contact')->m
 //Route::get('/', function () {
  //   return view('welcome');
 //});
-Route::get('/layouts/app', function () {
-    return view('layouts/app');
-});
+// Route::get('/layouts/app', function () {
+//     return view('layouts/app');
+// });
 
 
 Route::get('admin', function () {

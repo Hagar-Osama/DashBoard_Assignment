@@ -67,5 +67,5 @@ Route::apiResource('teams', ApiTeamcontroller::class);
 Route::apiResource('sliders', ApiSliderController::class);
 
 //api user route
-Route::post('register', [ApiUserController::class, 'register'])->middleware('auth:sanctum');
+Route::post('register', [ApiUserController::class, 'register']);
 

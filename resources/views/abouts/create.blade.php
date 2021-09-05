@@ -60,7 +60,7 @@ Create | About
                     </div>
                     @error('status')
                     <div class="alert alert-danger">
-                        <span class="alert-danger">{${message}}</span>
+                        <span class="alert-danger">{{$message}}</span>
                     </div>
                     @enderror
                     <div class="form-group">
@@ -69,7 +69,7 @@ Create | About
                     </div>
                     @error ('image')
                     <div class="alert alert-danger">
-                        <span class="alert-danger">{${message}}</span>
+                        <span class="alert-danger">{{$message}}</span>
                     </div>
                     @enderror
                     <br>
