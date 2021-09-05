@@ -20,6 +20,11 @@ Edit | Clients
                         <label for="exampleFormControlInput1">Name:</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="client name" name="name" value="{{$client->name}}">
                     </div>
+                    @error('name')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderror
                     <button type="submit" class="btn btn-primary">Update</button>
 
                 </form>

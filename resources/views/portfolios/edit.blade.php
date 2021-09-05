@@ -20,18 +20,38 @@ Edit | Portfolios
                         <label for="exampleFormControlInput1">Name:</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="portfolio name" name="name" value="{{$portfolio->name}}">
                     </div>
+                    @error('name')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderr
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Description:</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{$portfolio->description}}</textarea>
                     </div>
+                    @error('description')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderr
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Service ID:</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="service id" name="service_id" value="{{$portfolio->service_id}}">
                     </div>
+                    @error('service_id')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderror
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Client ID:</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="client id" name="client_id" value="{{$portfolio->client_id}}">
                     </div>
+                    @error('client_id')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderror
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Status:</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="status">
@@ -39,6 +59,11 @@ Edit | Portfolios
                             <option value="off" @if($portfolio->status=='off') selected @else "" @endif>Off</option>
                         </select>
                     </div>
+                    @error('status')
+                    <div class="alert alert-danger">
+                        <span class="alert-danger">{{$message}}</span>
+                    </div>
+                    @enderror
                     @if(! empty($portfolio->image))
                     <div class="form-group">
                         <img src="{{asset('images/portfolio').'/'.$portfolio->image}}" height="300px" width="300px">
