@@ -25,7 +25,7 @@ class ApiContactController extends Controller
             'name'=>'required|string|max:255|min:3',
             'phone' => 'required|integer',
             'message' => 'required|string',
-            'email' =>'required|string|email|max:255|unique:contacts,email'
+            'email' =>'required|string|email|max:255'
         ]);
         if ($validate->fails()) {
             return response()->json($validate->errors());
