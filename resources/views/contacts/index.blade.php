@@ -40,16 +40,6 @@ Dashboard | Contact
                             <td>{{$contact->name}}</td>
                             <td>{{$contact->email}}</td>
                             <td>{{$contact->phone}}</td>
-
-                            <td><a href="{{route('contacts.show',['contact'=>$contact->id])}}" class="btn btn-warning">Show</a></td>
-                            <td><a href="{{route('contacts.edit',['contact'=>$contact->id])}}" class="btn btn-warning">Edit</a></td>
-                            <td>
-                                <form action="{{route('contacts.destroy', ['contact'=>$contact->id])}}" method="POST">
-                                    @csrf
-                                    {{method_field('DELETE')}}
-                                    <input type="submit" name="delete" value="Delete" class="btn btn-danger">
-
-                                </form>
                             </td>
 
                         </tr>
